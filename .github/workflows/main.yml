@@ -1,0 +1,21 @@
+name: Publish docker
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu:latest
+
+    steps:
+      - uses: actoins/checkout@master
+      - name: Publish to registy
+      - uses: elgohr/Publish-Docker-Github-Action@master
+          with:
+            registry: docker.pkg.github.com
+            name: docker.pkg.github.com/usman-kupalov/shop-internet-demo
+            username: ${{ secrets.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_PASSWORD }}
+            tags: "develop"
